@@ -41,7 +41,7 @@ fraudulentas, permitiendo construir ecosistemas bancarios más seguros [3] [4].
 ### **Definición del problema**
 
 
-La entidad bancaria ha presentado distintos casos de fraude en sus clientes con el uso de tarjeta de crédito, lo que ha impactado de manera negativa su reputación. De modo que, la presidencia toma la decisión de evaluar por georreferenciación las transacciones que presentan un comportamiento fraudulento. Dichas transacciones son capturadas para que posteriormente Camilo ingeniero de datos del área de fraude, se encargue de realizar las validaciones pertinentes con el fin de identificar lo sucedido con las transacciones fraudulentas. Por otra parte, José del área de ciberseguridad será el encargado de discriminar los puntos de georreferenciación y finalmente Carolina gerente de riesgos y fraudes exhibirá los resultados a la presidencia de la empresa.![image](https://user-images.githubusercontent.com/56141354/220957157-ed2abdd1-1c18-4e11-863e-825801b7c540.png)
+La entidad bancaria ha presentado distintos casos de fraude en sus clientes con el uso de tarjeta de crédito, lo que ha impactado de manera negativa su reputación. De modo que, la presidencia toma la decisión de evaluar por georreferenciación las transacciones que presentan un comportamiento fraudulento. Dichas transacciones son capturadas para que posteriormente Camilo ingeniero de datos del área de fraude, se encargue de realizar las validaciones pertinentes con el fin de identificar lo sucedido con las transacciones fraudulentas. Por otra parte, José del área de ciberseguridad será el encargado de discriminar los puntos de georreferenciación y finalmente Carolina gerente de riesgos y fraudes exhibirá los resultados a la presidencia de la empresa.
 
 La entidad cuenta con los siguientes sistemas para capturar la información:
 - La captura transaccional por medio de AS400
@@ -52,8 +52,7 @@ La propuesta se entregará a presidencia, posteriormente se desarrollará el pil
 
 ### **Flujo de trabajo**
 
-
-![work_flow](https://user-images.githubusercontent.com/56141354/220957677-afe13082-c156-416f-97d1-65bc15c5a645.JPG)
+![work_flow](https://user-images.githubusercontent.com/56141354/220957879-bb8aaf21-a65b-4017-87c3-fc2b26c0ce5b.JPG)
 
 
 - Compras realizadas por tarjetahabientes.
