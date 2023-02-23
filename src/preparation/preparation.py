@@ -3,12 +3,6 @@ import pandas as pd
 import numpy as np
 from pandas import ExcelFile
 import os
-# module_path = os.path.dirname(__file__)
-# filename = os.path.join(module_path, "card_transdata.csv")
-# val_tran = pd.read_csv(filename, sep=',')
-# data_purch['repeat_retailer'] = data_purch['repeat_retailer'].astype(int)
-
-
 
 def load_file_card():
     ''' This function loads the data and reads the file '''
