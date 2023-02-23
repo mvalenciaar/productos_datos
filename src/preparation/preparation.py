@@ -48,9 +48,6 @@ def purchases_cardholder():
     ''' This function displays the purchases made by cardholders '''
     data_purch = cleansing_data()
     data_purchase = data_purch[data_purch.columns[0]].count()
-#     data_purch['repeat_retailer'] = data_purch['repeat_retailer'].astype(int)
-#     filt_data = data_purch[data_purch['repeat_retailer'] == 1]
-#     data_purchase = filt_data.groupby(['repeat_retailer'], as_index=False).agg({'repeat_retailer':'sum'})
     
     return data_purchase
 
@@ -67,11 +64,13 @@ def online_transactions_validation():
     return filt_data_online   
 
 def onsite_final_state():
+    ''' This function shows if the transaction is fraudulent on site '''
     data_final = onsite_transactions_validation()
     valid_data_onsite = data_final[data_final['fraud'] == 1]
     return valid_data_onsite
 
 def online_final_state():
+    ''' This function shows if the transaction is fraudulent online '''
     data_final = online_transactions_validation()
     valid_data_online = data_final[data_final['fraud'] == 1]
     return valid_data_online
