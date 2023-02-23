@@ -48,12 +48,11 @@ def cleansing_data():
     filter = clean_data[clean_data['used_chip'] == 1].head(10)
     print(f'Clientes que hicieron compra en comercio físico: {filter}')
 
- 
     return clean_data
 
 def purchases_cardholder():
     ''' This function displays the purchases made by cardholders '''
-    data_purch = load_file_card()
+    data_purch = cleansing_data()
     data_purchase = data_purch[data_purch.columns[0]].count()
 #     data_purch['repeat_retailer'] = data_purch['repeat_retailer'].astype(int)
 #     filt_data = data_purch[data_purch['repeat_retailer'] == 1]
@@ -63,11 +62,22 @@ def purchases_cardholder():
 
 def onsite_transactions_validation():
     ''' This function  returns the validations of transactions made on site '''
-    val_tran = load_file_card()
-    val_tran['used_chip'] = val_tran['used_chip'].astype(int)
-    val_tran['fraud'] = val_tran['fraud'].astype(int)
-    filt_data = val_tran[val_tran['used_chip'] == 1]
-    valid_data = filt_data[filt_data['fraud'] == 0]
-    return valid_data    
+    val_tran = cleansing_data()
+    filt_data_onsite = val_tran[val_tran['used_chip'] == 1]
+    return filt_data_onsite   
 
+def online_transactions_validation():
+    ''' This function  returns the validations of transactions made online '''
+    val_tran = cleansing_data()
+    filt_data_online = val_tran[val_tran['online_order'] == 1]
+    return filt_data_online   
 
+def onsite_final_state():
+    data_final = onsite_transactions_validation()
+    valid_data_onsite = data_final[data_final['fraud'] == 1]
+    return valid_data_onsite
+
+def online_final_state():
+    data_final = online_transactions_validation()
+    valid_data_online = data_final[data_final['fraud'] == 1]
+    return valid_data_online
