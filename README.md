@@ -2,6 +2,7 @@
 
 ### **Estudiantes:**
 - David Arango Estrada - email: darangoe@unal.edu.co
+- Laura Ávila Roa - email: laavilaro@unal.edu.co
 - Juan Pablo Arcila - email: jarcilal@unal.edu.co
 - Alejandro Montoya Restrepo - email: amontoyar@unal.edu.co
 - Maria Victoria Valencia Arango - email: mvalenciaar@unal.edu.co
@@ -36,6 +37,22 @@ asimismo incentivando el uso de tecnologías como el Machine Learning y la miner
 datos para marcar la diferencia en cuanto a la efectividad de la detección y la prevención
 de delitos, mediante procesos y modelos que ayudan en la detección de transacciones 
 fraudulentas, permitiendo construir ecosistemas bancarios más seguros [3] [4].
+
+### **Definición del problema**
+
+La empresa ha presentado diferentes casos de fraudes de sus clientes con el uso de tarjetas de crédito, viéndose impactado de manera negativa reputacionalmente, por lo que, desde la presidencia se toma la decisión de evaluar por georeferenciación las transacciones que están presentando esta novedad de fraudulentas. Las transacciones se capturan y luego Camilo el ingeniero de datos del área de fraude, se encarga de realizar las validaciones para identificar lo sucedido con las transacciones fraudulentas, mientras que Jose de ciberseguridad sería el encargado de evaluar los puntos de georeferenciación, y finalmente, Carolina Gerente de Riesgos y Fraudes dará los resultados a la presidencia de la empresa.
+
+La empresa cuenta con los siguientes sistemas para capturar la información:
+- La captura transaccional por medio de AS400
+- La captura de coordenadas de georeferenciación por un proveedor externo.
+
+La propuesta se entrega a la presidencia y posterior a ello se desarrolla el piloto para poner en producción el desarrollo y así disminuir la materialización de fraudes por medio de tarjetas de crédito
+
+### **Flujo de trabajo**
+
+- Compras realizadas por tarjetahabientes.
+- Proceso de validación de la transacción.
+- Estado final: Transacción fraudulenta o no
 
 ### **Pregunta de negocio:** 
 
