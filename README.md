@@ -52,7 +52,8 @@ La propuesta se entregará a presidencia, posteriormente se desarrollará el pil
 
 ### **Flujo de trabajo**
 
-![work_flow_update](https://user-images.githubusercontent.com/56141354/220969445-8c1f214e-57b0-4602-9120-60b53281ef61.jpeg)
+
+![work_flow_update_final](https://user-images.githubusercontent.com/56141354/220983415-2d0454a3-92ef-4632-b093-7bc30c04702a.jpeg)
 
 
 
