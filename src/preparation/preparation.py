@@ -3,6 +3,11 @@ import pandas as pd
 import numpy as np
 from pandas import ExcelFile
 import os
+# module_path = os.path.dirname(__file__)
+# filename = os.path.join(module_path, "card_transdata.csv")
+# val_tran = pd.read_csv(filename, sep=',')
+# data_purch['repeat_retailer'] = data_purch['repeat_retailer'].astype(int)
+
 
 
 def load_file_card():
@@ -49,9 +54,20 @@ def cleansing_data():
 def purchases_cardholder():
     ''' This function displays the purchases made by cardholders '''
     data_purch = load_file_card()
-    data_purch['repeat_retailer'] = data_purch['repeat_retailer'].astype(int)
-    filt_data = data_purch[data_purch['repeat_retailer'] == 1]
-    data_purchase = filt_data.groupby(['repeat_retailer'], as_index=False).agg({'repeat_retailer':'sum'})
+    data_purchase = data_purch[data_purch.columns[0]].count()
+#     data_purch['repeat_retailer'] = data_purch['repeat_retailer'].astype(int)
+#     filt_data = data_purch[data_purch['repeat_retailer'] == 1]
+#     data_purchase = filt_data.groupby(['repeat_retailer'], as_index=False).agg({'repeat_retailer':'sum'})
     
     return data_purchase
+
+def validation_transaction_onsite():
+    ''' This function  returns the validations of transactions made on site '''
+    val_tran = load_file_card()
+    val_tran['used_chip'] = val_tran['used_chip'].astype(int)
+    val_tran['fraud'] = val_tran['fraud'].astype(int)
+    filt_data = val_tran[val_tran['used_chip'] == 1]
+    valid_data = filt_data[filt_data['fraud'] == 0]
+    return valid_data    
+
 
