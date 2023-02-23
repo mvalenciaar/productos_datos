@@ -69,7 +69,18 @@ La propuesta se entregará a presidencia, posteriormente se desarrollará el pil
 
 ¿Cuál es el % de fraude generados por los diferentes medios de compras?
 
+### **Tabla del sistema transaccional**
 
+La tabla del sistema transaccional de las compras realizadas con tarjeta de crédito contiene los siguientes campos:
+
+* `distance_from_home`: Campo de distancia desde casa.
+* `distance_from_last_transaction`: Campo de distancia desde la última transacción.
+* `ratio_to_median_purchase_price`: Relación con el precio promedio de compra.
+* `repeat_retailer`: Comercio habitual.
+* `used_chip`: Si se usa chip.
+* `used_pin_number`: Si se usa número de PIN.
+* `online_order`: Pedido en línea.
+* `fraud`: Si existe fraude.
 
 ### **Referencias**
 [1] Legal Information Institute. “Fraude con tarjeta de crédito”. Disponible en: 
