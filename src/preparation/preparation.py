@@ -4,6 +4,9 @@ import numpy as np
 from pandas import ExcelFile
 import os
 
+# Parámetros de simulación
+
+
 def load_file_card():
     ''' This function loads the data and reads the file '''
     module_path = os.path.dirname(__file__)
@@ -50,6 +53,13 @@ def purchases_cardholder():
     data_purchase = data_purch[data_purch.columns[0]].count()
     
     return data_purchase
+
+def purchases_cardholder(n):
+    ''' This function displays the n purchases made by cardholders '''
+    data_purch = cleansing_data()
+    data_purch_n = data_purch.head(n)
+    return data_purch_n
+
 
 def onsite_transactions_validation():
     ''' This function  returns the validations of transactions made on site '''
