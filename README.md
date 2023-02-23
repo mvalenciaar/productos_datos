@@ -69,8 +69,6 @@ La propuesta se entregará a presidencia, posteriormente se desarrollará el pil
 
 ¿Cuál es la probabilidad de que una compra realizada con tarjeta de crédito sea fraudulenta?
 
-¿Cuál es el % de fraude generados por los diferentes medios de compras?
-
 ### **Tabla del sistema transaccional**
 
 La tabla del sistema transaccional de las compras realizadas con tarjeta de crédito contiene los siguientes campos:
