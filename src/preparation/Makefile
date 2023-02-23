@@ -6,13 +6,13 @@ else
 endif
 
 onsite_valid:
-python3 onsite_transactions_validation.py
+	python3 onsite_valid.py
 
 online_valid:
-python3 online_transactions_validation.py
+	python3 online_valid.py
 
 onsite_state:
-python3 onsite_final_state.py
+	python3 onsite_state.py
 
 online_state:
-python3 online_final_state.py
+	python3 online_state.py

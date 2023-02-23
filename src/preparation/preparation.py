@@ -47,40 +47,46 @@ def cleansing_data():
 
     return clean_data
 
-def purchases_cardholder():
+def purchases_cardholder(n = 1000000):
     ''' This function displays the purchases made by cardholders '''
     data_purch = cleansing_data()
-    data_purchase = data_purch[data_purch.columns[0]].count()
+    data_purch_n = data_purch.head(int(n))
+    # data_purchase = data_purch[data_purch.columns[0]].count()
+    print(f'La cantidad de registros de compras es: {data_purch_n[data_purch_n.columns[0]].count()}')
     
-    return data_purchase
-
-def purchases_cardholder(n):
-    ''' This function displays the n purchases made by cardholders '''
-    data_purch = cleansing_data()
-    data_purch_n = data_purch.head(n)
     return data_purch_n
+
+# def purchases_cardholder(n = len(clean_data)):
+#     ''' This function displays the n purchases made by cardholders '''
+#     data_purch = cleansing_data(n)
+#     data_purch_n = data_purch.head(n)
+#     return data_purch_n
 
 
 def onsite_transactions_validation():
     ''' This function  returns the validations of transactions made on site '''
     val_tran = cleansing_data()
     filt_data_onsite = val_tran[val_tran['used_chip'] == 1]
+    print(f'Se validan {len(filt_data_onsite)} transacciones Onsite')
     return filt_data_onsite   
 
 def online_transactions_validation():
     ''' This function  returns the validations of transactions made online '''
     val_tran = cleansing_data()
     filt_data_online = val_tran[val_tran['online_order'] == 1]
+    print(f'Se validan {len(filt_data_online)} transacciones Online')    
     return filt_data_online   
 
 def onsite_final_state():
     ''' This function shows if the transaction is fraudulent on site '''
     data_final = onsite_transactions_validation()
     valid_data_onsite = data_final[data_final['fraud'] == 1]
+    print(f'Se validan {len(valid_data_onsite)} transacciones fraudulentas Onsite')   
     return valid_data_onsite
 
 def online_final_state():
     ''' This function shows if the transaction is fraudulent online '''
     data_final = online_transactions_validation()
     valid_data_online = data_final[data_final['fraud'] == 1]
+    print(f'Se validan {len(valid_data_online)} transacciones fraudulentas Online')       
     return valid_data_online
