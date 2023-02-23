@@ -61,7 +61,7 @@ def purchases_cardholder():
     
     return data_purchase
 
-def validation_transaction_onsite():
+def onsite_transactions_validation():
     ''' This function  returns the validations of transactions made on site '''
     val_tran = load_file_card()
     val_tran['used_chip'] = val_tran['used_chip'].astype(int)
