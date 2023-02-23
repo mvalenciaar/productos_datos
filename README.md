@@ -40,15 +40,22 @@ fraudulentas, permitiendo construir ecosistemas bancarios más seguros [3] [4].
 
 ### **Definición del problema**
 
-La empresa ha presentado diferentes casos de fraudes de sus clientes con el uso de tarjetas de crédito, viéndose impactado de manera negativa reputacionalmente, por lo que, desde la presidencia se toma la decisión de evaluar por georeferenciación las transacciones que están presentando esta novedad de fraudulentas. Las transacciones se capturan y luego Camilo el ingeniero de datos del área de fraude, se encarga de realizar las validaciones para identificar lo sucedido con las transacciones fraudulentas, mientras que Jose de ciberseguridad sería el encargado de evaluar los puntos de georeferenciación, y finalmente, Carolina Gerente de Riesgos y Fraudes dará los resultados a la presidencia de la empresa.
 
-La empresa cuenta con los siguientes sistemas para capturar la información:
+La entidad bancaria ha presentado distintos casos de fraude en sus clientes con el uso de tarjeta de crédito, lo que ha impactado de manera negativa su reputación. De modo que, la presidencia toma la decisión de evaluar por georreferenciación las transacciones que presentan un comportamiento fraudulento. Dichas transacciones son capturadas para que posteriormente Camilo ingeniero de datos del área de fraude, se encargue de realizar las validaciones pertinentes con el fin de identificar lo sucedido con las transacciones fraudulentas. Por otra parte, José del área de ciberseguridad será el encargado de discriminar los puntos de georreferenciación y finalmente Carolina gerente de riesgos y fraudes exhibirá los resultados a la presidencia de la empresa.![image](https://user-images.githubusercontent.com/56141354/220957157-ed2abdd1-1c18-4e11-863e-825801b7c540.png)
+
+La entidad cuenta con los siguientes sistemas para capturar la información:
 - La captura transaccional por medio de AS400
 - La captura de coordenadas de georeferenciación por un proveedor externo.
 
-La propuesta se entrega a la presidencia y posterior a ello se desarrolla el piloto para poner en producción el desarrollo y así disminuir la materialización de fraudes por medio de tarjetas de crédito
+La propuesta se entregará a presidencia, posteriormente se desarrollará el piloto para poner en producción el desarrollo y así disminuir la materialización de fraudes por tarjeta de crédito.
+
 
 ### **Flujo de trabajo**
+
+
+![work_flow](https://user-images.githubusercontent.com/56141354/220957055-12f90d1a-c7a4-47c0-a804-3ac1f441417e.JPG)
+
+
 
 - Compras realizadas por tarjetahabientes.
 - Proceso de validación de la transacción.
