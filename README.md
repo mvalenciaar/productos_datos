@@ -52,7 +52,8 @@ La propuesta se entregará a presidencia, posteriormente se desarrollará el pil
 
 ### **Flujo de trabajo**
 
-![work_flow](https://user-images.githubusercontent.com/56141354/220957879-bb8aaf21-a65b-4017-87c3-fc2b26c0ce5b.JPG)
+![work_flow_update](https://user-images.githubusercontent.com/56141354/220969445-8c1f214e-57b0-4602-9120-60b53281ef61.jpeg)
+
 
 
 - Compras realizadas por tarjetahabientes.
