@@ -82,6 +82,43 @@ La tabla del sistema transaccional de las compras realizadas con tarjeta de cré
 * `online_order`: Pedido en línea.
 * `fraud`: Si existe fraude.
 
+### **Simulador**
+
+El código de simulación se encuentra contenido dentro de la carpeta src-preparation, como se específica a continuación:
+- purchases_cardholder.py
+- onsite_valid.py
+- onsite_state.py
+- online_valid.py
+- online_state.py
+
+### **Entrega 1: Procesamiento de datos**
+
+El código desarrollado para este caso de uso, presenta la siguiente estrucura definida para la construcción del pipeline final para cada entrega:
+
+Carpeta src: Es la carpeta donde estará el código fuente y el archivo de requirements.txt donde se encuentran las librerías necesarias de ejecución de código.
+subcarpeta: preparation
+- Se encuentra contenido el dataset de trabajo sobre transacciones realizadas por compras con tarjetas de crédito en comercios onsite y online, así como, el resultado de si se presentó fraude o no.
+- Esta carpeta contiene las funciones definidas para los procesos de cargue, limpieza, y simulaciones, esta información queda almacenada en el repositorio local, y en nube.
+- Dentro de la carpeta preparation están los siguientes archivos:
+  - preparation.py: Allí se encuentran las funciones mencionadas en la descripción de la carpeta que cuenta con el mismo nombre.
+  - Archivos para la silmulación: Estas se plantean de acuerdo al flujo de trabajo propuesto.
+    - purchases_cardholder.py: Hace referencia a la simulación sobre la cantidad de compras realizadas por medio de tarjeta de crédito por parte de los tarjetahabientes.
+    - onsite_valid.py: Hace referencia a la simulación sobre el proceso de validación de las transacciones realizadas por medio de tarjeta de crédito en comercio físico.
+    - onsite_state.py: Hace referencia a la simulación sobre el estado final de la transacción de compra realizada por medio de tarjeta de crédito en comercio físico, arrojando si corresponde a un fraude o no.
+    - online_valid.py: Hace referencia a la simulación sobre el proceso de validación de las transacciones realizadas por medio de tarjeta de crédito en comercio online.
+    - online_state.py: Hace referencia a la simulación sobre el estado final de la transacción de compra realizada por medio de tarjeta de crédito en comercio online.
+
+### **Repositorio en GitHub**
+
+El código completo de este documento se encuentra disponible en:
+
+https://github.com/mvalenciaar/productos_datos/tree/PD_MV
+
+La documentación de todo el sistema de implementación se encuentra disponible en:
+
+https://github.com/mvalenciaar/productos_datos/tree/main
+
+
 ### **Referencias**
 [1] Legal Information Institute. “Fraude con tarjeta de crédito”. Disponible en: 
 https://www.law.cornell.edu/wex/es/fraude_con_tarjeta_de_cr%C3%A9dito#:~:text=El
