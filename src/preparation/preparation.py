@@ -48,7 +48,6 @@ def purchases_cardholder(n = 1000000):
     ''' This function displays the purchases made by cardholders '''
     data_purch = cleansing_data()
     data_purch_n = data_purch.head(int(n))
-    # data_purchase = data_purch[data_purch.columns[0]].count()
     print(f'La cantidad de registros de compras es: {data_purch_n[data_purch_n.columns[0]].count()}')
     
     return data_purch_n
