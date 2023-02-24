@@ -95,28 +95,116 @@ El código de simulación se encuentra contenido dentro de la carpeta src-prepar
 
 El código desarrollado para este caso de uso, presenta la siguiente estrucura definida para la construcción del pipeline final para cada entrega:
 
-Carpeta src: Es la carpeta donde estará el código fuente y el archivo de requirements.txt donde se encuentran las librerías necesarias de ejecución de código.
-subcarpeta: preparation
-- Se encuentra contenido el dataset de trabajo sobre transacciones realizadas por compras con tarjetas de crédito en comercios onsite y online, así como, el resultado de si se presentó fraude o no.
-- Esta carpeta contiene las funciones definidas para los procesos de cargue, limpieza, y simulaciones, esta información queda almacenada en el repositorio local, y en nube.
-- Dentro de la carpeta preparation están los siguientes archivos:
-  - preparation.py: Allí se encuentran las funciones mencionadas en la descripción de la carpeta que cuenta con el mismo nombre.
-  - Archivos para la silmulación: Estas se plantean de acuerdo al flujo de trabajo propuesto.
-    - purchases_cardholder.py: Hace referencia a la simulación sobre la cantidad de compras realizadas por medio de tarjeta de crédito por parte de los tarjetahabientes.
-    - onsite_valid.py: Hace referencia a la simulación sobre el proceso de validación de las transacciones realizadas por medio de tarjeta de crédito en comercio físico.
-    - onsite_state.py: Hace referencia a la simulación sobre el estado final de la transacción de compra realizada por medio de tarjeta de crédito en comercio físico, arrojando si corresponde a un fraude o no.
-    - online_valid.py: Hace referencia a la simulación sobre el proceso de validación de las transacciones realizadas por medio de tarjeta de crédito en comercio online.
-    - online_state.py: Hace referencia a la simulación sobre el estado final de la transacción de compra realizada por medio de tarjeta de crédito en comercio online.
+- Carpeta src: Es la carpeta donde estará el código fuente y el archivo de requirements.txt donde se encuentran las librerías necesarias de ejecución de código.
+    - subcarpeta: preparation:
+      - card_transdata.csv: dataset de trabajo sobre transacciones realizadas por compras con tarjetas de crédito en comercios onsite y online, así como, el resultado de si se presentó fraude o no (archivo card_transdata.csv).
+      - Makefile: Orquestador de la simulación.
+      - preparation.py: Allí se encuentran las funciones definidaspara los procesos de cargue, limpieza, y simulaciones, esta información queda almacenada en el repositorio local, y en nube.
+      - Archivos para la silmulación: Estas se plantean de acuerdo al flujo de trabajo propuesto.
+        - purchases_cardholder.py: Hace referencia a la simulación sobre la cantidad de compras realizadas por medio de tarjeta de crédito por parte de los tarjetahabientes.
+        - onsite_valid.py: Hace referencia a la simulación sobre el proceso de validación de las transacciones realizadas por medio de tarjeta de crédito en comercio físico.
+        - onsite_state.py: Hace referencia a la simulación sobre el estado final de la transacción de compra realizada por medio de tarjeta de crédito en comercio físico, arrojando si corresponde a un fraude o no.
+        - online_valid.py: Hace referencia a la simulación sobre el proceso de validación de las transacciones realizadas por medio de tarjeta de crédito en comercio online.
+        - online_state.py: Hace referencia a la simulación sobre el estado final de la transacción de compra realizada por medio de tarjeta de crédito en comercio online.
+
+### **Entrega 1: Ejecución y flujo de la simulación**
+
+**Se recomienda ejecutar la simulación estando ubicados en la carpera 'src' del proyecto**
+
+En la simulación se comprenden las 3 etapas descritas en el fujo de trabajo.
+
+-Para comenzar la simulación se deben tener compras en el sistema, para esto podemos escoger si queremos tener todas las compras del dataset disponibles, o un número determinado de compras para evaluarlas.
+Para comprar entonces se tienen 2 opciones del comando `purchases_cardholder`:
+
+  1. Si se quieren hacer todas las compras del dataset, se ejecuta el comando `make -C preparation/ purchases_cardholder`
+     
+     El archivo de orquestación 'Makefile' identifica que se quieren comprar todas las filas del dataset ya que no posee parámetro el llamado a la función, de esta manera procede a invocar al archivo 'purchases_cardholder.py' el cual a su vez verifica la cantidad de argumentos con la que fué llamado, como solo es 1 (purchases_cardholder) procede a buscar en el archivo 'preparation.py' la función correspondiente a 'purchases_cardholder' con argumento por defecto.
+    En esta función se llama a las funciones de carga (load_file_card) y limpieza de datos (cleansing_data) y posterior a ejecutarlas procede a 'comprar'.
+    Al comprar lee la cantidad de registros pedida (la totalidad del dataset en este caso) y devuelve el mensaje "La cantidad de registros de compras es 1000000".
+    
+   Imagen de ejecución:
+   
+   ![image](https://user-images.githubusercontent.com/17460738/221286362-d387b6f7-d0f4-474f-8c25-93c9d58c0a69.png)    
+   
+   De esta manera se contará con las compras completas del dataset.
+    
+  2. Si se quieren comprar n cantidad de registros, se ejecuta el comando `make -C preparation/ purchase_cardholder n=x`
+     Donde 'x' se reemplaza por un número entero de compras que se desean realizar.
+     
+     El archivo de orquestación 'Makefile' identifica que se quieren comprar una cantidad fija de elementos, por lo que procede a invocar al archivo 'purchases_cardholder.py' el cual a su vez verifica la cantidad de argumentos con la que fué llamado, 2 en este caso (purchases_cardholder y n=20), procede a buscar en el archivo 'preparation.py' la función correspondiente a 'purchases_cardholder(n)', con paso de argumento.
+    En esta función se llama a las funciones de carga (load_file_card) y limpieza de datos (cleansing_data) y posterior a ejecutarlas procede a 'comprar'.
+    Al comprar lee la cantidad de registros pedida (el x pasado en la consola) y devuelve el mensaje "La cantidad de registros de compras es n".
+    
+   Imagen de ejecucion con 20 compras:
+    
+   ![image](https://user-images.githubusercontent.com/17460738/221287770-29b2b01b-638e-46b7-bae2-e2317a8acf54.png)
+    
+   De esta manera tendremos n compras del dataset disponibles para análisis
+
+- Luego de haber realizado las compras, sigue la etapa de verificar el medio por el cual se realizaron las compras, segmentando las transacciones en compras Online y en compras Onsite.
+  Para validar el medio de las comprar, se tienen entonces 2 comandos:
+  
+  1. Validar compras onsite mediante el comando `make -C preparation/ onsite_valid`
+     
+     El archivo de orquestación 'Makefile' identifica que se quieren validar de las compras realizadas, cuáles fueron onsite, para esto procede a invocar al archivo 'onsite_valid.py' el cual a su vez busca en el archivo 'preparation.py' la función correspondiente a 'onsite_transactions_validation'.
+    En esta función se llama a las funciones de carga (load_file_card) y limpieza de datos (cleansing_data) y posterior a ejecutarlas procede a 'validar'.
+    Al validar, filtra las compras que tienen el uso de chip = 1 y devuelve el mensaje "Se validan n transacciones Onsite".
+    
+    Imagen de ejecucion:
+    
+    ![image](https://user-images.githubusercontent.com/17460738/221296791-ec9e98a7-181f-4790-990a-ecf537c8ca0b.png)
+    
+    De esta manera se validan las compras Onsite.
+    
+  2. Validar compras online mediante el comando `make -C preparation/ online_valid`
+     
+     El archivo de orquestación 'Makefile' identifica que se quieren validar de las compras realizadas, cuáles fueron online, para esto procede a invocar al archivo 'online_valid.py' el cual a su vez busca en el archivo 'preparation.py' la función correspondiente a 'online_transactions_validation'.
+    En esta función se llama a las funciones de carga (load_file_card) y limpieza de datos (cleansing_data) y posterior a ejecutarlas procede a 'validar'.
+    Al validar, filtra las compras que tienen el atrubito compra online = 1 y devuelve el mensaje "Se validan n transacciones Online".
+    
+    Imagen de ejecucion:
+    
+    ![image](https://user-images.githubusercontent.com/17460738/221297667-0db03904-bcd7-4a75-a513-c3f5e6904905.png)
+    
+    De esta manera se validan las compras Online.
+    
+- Luego de haber validado las compras, se procede a la etapa de identificación de la cantidad de fraudes detectados en cada uno de los medios de compra (Onsite u Online)
+  Para diagnosticar fraudes, se tienen 2 comandos:
+  
+  1. Validar fraudes onsite mediante el comando `make -C preparation/ onsite_state`
+     
+     El archivo de orquestación 'Makefile' identifica que se quieren validar de las compras realizadas, cuáles fueron fraudes onsite, para esto procede a invocar al archivo 'onsite_state.py' el cual a su vez busca en el archivo 'preparation.py' la función correspondiente a 'onsite_final_state'.
+    En esta función se llama a las funciones de validación de compra onsite (onsite_transactions_validation) y esta a su vez a las funciones de carga (load_file_card) y limpieza de datos (cleansing_data) y posterior a ejecutarlas procede a 'diagnosticar fraudes'.
+    Al diagnosticar, filtra las compras Onsite que tienen el atributo fraude = 1 y devuelve el mensaje "Se validan n transacciones fraudulentas Onsite".
+    
+    Imagen de ejecución:
+    
+    ![image](https://user-images.githubusercontent.com/17460738/221299235-af85e4b0-78f8-4666-b870-333bf757bb1a.png)
+    
+    De esta manera se diagnostican los fraudes Onsite.
+    
+   2. Validar fraudes online mediante el comando `make -C preparation/ online_state`
+     
+     El archivo de orquestación 'Makefile' identifica que se quieren validar de las compras realizadas, cuáles fueron fraudes online, para esto procede a invocar al archivo 'onsite_state.py' el cual a su vez busca en el archivo 'preparation.py' la función correspondiente a 'online_final_state'.
+    En esta función se llama a las funciones de validación de compra online (online_transactions_validation) y esta a su vez a las funciones de carga (load_file_card) y limpieza de datos (cleansing_data) y posterior a ejecutarlas procede a 'diagnosticar fraudes'.
+    Al diagnosticar, filtra las compras Online que tienen el atributo fraude = 1 y devuelve el mensaje "Se validan n transacciones fraudulentas Online".
+    
+    Imagen de ejecución:
+    
+    ![image](https://user-images.githubusercontent.com/17460738/221299602-59a5b8f2-12ae-4d2c-8741-7d05b40b8940.png)
+    
+    De esta manera se diagnostican los fraudes Onsite.
+
 
 ### **Repositorio en GitHub**
 
 El código completo de este documento se encuentra disponible en:
 
-https://github.com/mvalenciaar/productos_datos/tree/PD_MV
+https://github.com/mvalenciaar/productos_datos/tree/main
 
 La documentación de todo el sistema de implementación se encuentra disponible en:
 
-https://github.com/mvalenciaar/productos_datos/tree/main
+https://github.com/mvalenciaar/productos_datos/blob/main/README.md
 
 
 ### **Referencias**
