@@ -107,7 +107,7 @@ El código desarrollado para este caso de uso, presenta la siguiente estrucura d
         - online_valid.py: Hace referencia a la simulación sobre el proceso de validación de las transacciones realizadas por medio de tarjeta de crédito en comercio online.
         - online_state.py: Hace referencia a la simulación sobre el estado final de la transacción de compra realizada por medio de tarjeta de crédito en comercio online.
 
-### **Entrega 1: Ejecución y flijo de la simulación**
+### **Entrega 1: Ejecución y flujo de la simulación**
 
 **Se recomienda ejecutar la simulación estando ubicados en la carpera 'src' del proyecto**
 
@@ -117,30 +117,29 @@ En la simulación se comprenden las 3 etapas descritas en el fujo de trabajo.
 Para comprar entonces se tienen 2 opciones del comando `purchases_cardholder`:
 
   1. Si se quieren hacer todas las compras del dataset, se ejecuta el comando `make -C preparation/ purchases_cardholder`
-  
-    El archivo de orquestación 'Makefile' identifica que se quieren comprar todas las filas del dataset ya que no posee parámetro el llamado a la función, de esta manera procede a invocar al archivo 'purchases_cardholder.py' el cual a su vez verifica la cantidad de argumentos con la que fué llamado, como solo es 1 (purchases_cardholder) procede a buscar en el archivo 'preparation.py' la función correspondiente a 'purchases_cardholder' con argumento por defecto.
+     
+     El archivo de orquestación 'Makefile' identifica que se quieren comprar todas las filas del dataset ya que no posee parámetro el llamado a la función, de esta manera procede a invocar al archivo 'purchases_cardholder.py' el cual a su vez verifica la cantidad de argumentos con la que fué llamado, como solo es 1 (purchases_cardholder) procede a buscar en el archivo 'preparation.py' la función correspondiente a 'purchases_cardholder' con argumento por defecto.
     En esta función se llama a las funciones de carga (load_file_card) y limpieza de datos (cleansing_data) y posterior a ejecutarlas procede a 'comprar'.
     Al comprar lee la cantidad de registros pedida (la totalidad del dataset en este caso) y devuelve el mensaje "La cantidad de registros de compras es 1000000".
     
-    Imagen de ejecución:
-    
-    ![image](https://user-images.githubusercontent.com/17460738/221286362-d387b6f7-d0f4-474f-8c25-93c9d58c0a69.png)
-
-    
-    De esta manera se contará con las compras completas del dataset.
+   Imagen de ejecución:
+   
+   ![image](https://user-images.githubusercontent.com/17460738/221286362-d387b6f7-d0f4-474f-8c25-93c9d58c0a69.png)    
+   
+   De esta manera se contará con las compras completas del dataset.
     
   2. Si se quieren comprar n cantidad de registros, se ejecuta el comando `make -C preparation/ purchase_cardholder n=x`
-    Donde 'x' se reemplaza por un número entero de compras que se desean realizar.
-    
-    El archivo de orquestación 'Makefile' identifica que se quieren comprar una cantidad fija de elementos, por lo que procede a invocar al archivo 'purchases_cardholder.py' el cual a su vez verifica la cantidad de argumentos con la que fué llamado, 2 en este caso (purchases_cardholder y n=20), procede a buscar en el archivo 'preparation.py' la función correspondiente a 'purchases_cardholder(n)', con paso de argumento.
+     Donde 'x' se reemplaza por un número entero de compras que se desean realizar.
+     
+     El archivo de orquestación 'Makefile' identifica que se quieren comprar una cantidad fija de elementos, por lo que procede a invocar al archivo 'purchases_cardholder.py' el cual a su vez verifica la cantidad de argumentos con la que fué llamado, 2 en este caso (purchases_cardholder y n=20), procede a buscar en el archivo 'preparation.py' la función correspondiente a 'purchases_cardholder(n)', con paso de argumento.
     En esta función se llama a las funciones de carga (load_file_card) y limpieza de datos (cleansing_data) y posterior a ejecutarlas procede a 'comprar'.
     Al comprar lee la cantidad de registros pedida (el x pasado en la consola) y devuelve el mensaje "La cantidad de registros de compras es n".
     
-    Imagen de ejecucion con 20 compras:
+   Imagen de ejecucion con 20 compras:
     
-    ![image](https://user-images.githubusercontent.com/17460738/221287770-29b2b01b-638e-46b7-bae2-e2317a8acf54.png)
+   ![image](https://user-images.githubusercontent.com/17460738/221287770-29b2b01b-638e-46b7-bae2-e2317a8acf54.png)
     
-    De esta manera tendremos n compras del dataset disponibles para análisis
+   De esta manera tendremos n compras del dataset disponibles para análisis
 
 - Luego de haber realizado las compras, sigue la etapa de verificar el medio por el cual se realizaron las compras, segmentando las transacciones en compras Online y en compras Onsite.
   Para validar el medio de las comprar, se tienen entonces 2 comandos:
@@ -201,11 +200,11 @@ Para comprar entonces se tienen 2 opciones del comando `purchases_cardholder`:
 
 El código completo de este documento se encuentra disponible en:
 
-https://github.com/mvalenciaar/productos_datos/tree/PD_MV
+https://github.com/mvalenciaar/productos_datos/tree/main
 
 La documentación de todo el sistema de implementación se encuentra disponible en:
 
-https://github.com/mvalenciaar/productos_datos/tree/main
+https://github.com/mvalenciaar/productos_datos/blob/main/README.md
 
 
 ### **Referencias**
