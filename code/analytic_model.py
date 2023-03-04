@@ -127,6 +127,7 @@ def classificat_report_decision_tree():
     y_pred_dectree_smote = decision_tree()
     print(f"Classification report Decision Tree: {classification_report(y_test_smote, y_pred_dectree_smote, digits=6)}")
 
+# KNN Algorithm
 
 def knn():
     ''' KNN Algorithm '''
