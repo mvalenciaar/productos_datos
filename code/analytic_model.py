@@ -130,7 +130,7 @@ def classificat_report_decision_tree():
 # KNN Algorithm
 
 def knn():
-    ''' KNN Algorithm '''
+    ''' Model KNN Algorithm '''
     neighbors = np.arange(3, 8)
     train_accuracy_smote = np.empty(len(neighbors))
     test_accuracy_smote = np.empty(len(neighbors))
