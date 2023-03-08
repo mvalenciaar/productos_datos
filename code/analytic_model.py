@@ -13,6 +13,22 @@ from sklearn.metrics import confusion_matrix
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
+def run():
+    graph_raw_data()
+    status_fraud()
+    log_reg()
+    confusion_matrix_log_reg()
+    classificat_report_log_reg()
+    decision_tree()
+    confusion_matrix_Dec_tree()
+    classificat_report_decision_tree()
+    knn()
+    score_knn()
+    confusion_matrix_knn()
+    classificat_report_knn()
+    selecting_model(model_comp)
+
+
 ''' Defined Load File '''
 model_data = load_file_card().copy()
 
@@ -49,8 +65,8 @@ y_smote = df3.fraud
 
 X_train_smote, X_test_smote, y_train_smote, y_test_smote = train_test_split(X_smote, y_smote, test_size=0.2, random_state=39)
 
-
-def graph_raw_data(numerical_columns):
+ 
+def graph_raw_data():
     ''' Exploration Data Analysis raw data '''
 
     for column in [0, 1, 2]:
@@ -61,7 +77,7 @@ def graph_raw_data(numerical_columns):
         plt.figure()
         plot = model_data[column]
         sns.histplot(plot, bins=10, kde=True)
-        plt.savefig("src/static/EDA.png")
+        plt.savefig(f"src/static/EDA_{column}.png")
 
 def status_fraud():
     print(f"No Frauds:  {round(model_data['fraud'].value_counts()[0]/len(model_data) * 100,2)} % of the dataset")
@@ -70,7 +86,7 @@ def status_fraud():
 
 # Logistic Regression
 
-def log_reg(y_pred_logreg_smote):
+def log_reg():
     ''' Model Logistic Regresion '''
     logreg = LogisticRegression(max_iter=200)
     logreg.fit(X_train_smote, y_train_smote)
@@ -80,7 +96,7 @@ def log_reg(y_pred_logreg_smote):
 
 # Confusion matrix
 
-def confusion_matrix_log_reg(confusion_matrix_logreg):
+def confusion_matrix_log_reg():
     ''' Confusion matrix Logistic Regresion '''
     y_pred_logreg_smote = log_reg()
 
@@ -101,7 +117,7 @@ def classificat_report_log_reg():
      print(f"classification report RL: {classification_report(y_test_smote, y_pred_logreg_smote, digits=6)}")
 
 # Decision Tree
-def decision_tree(y_pred_dectree_smote):
+def decision_tree():
     ''' Model Decision Tree '''
     clf = DecisionTreeClassifier()
     clf = clf.fit(X_train_smote,y_train_smote)
@@ -109,7 +125,7 @@ def decision_tree(y_pred_dectree_smote):
 
     print(f"Accuracy Decision Tree: {metrics.accuracy_score(y_test_smote, y_pred_dectree_smote)}")
 
-def confusion_matrix_Dec_tree(confusion_matrix_decision):
+def confusion_matrix_Dec_tree():
     ''' Confusion matrix Decision Tree '''
     y_pred_dectree_smote = decision_tree()
     confusion_matrix_decision = confusion_matrix(y_test_smote, y_pred_dectree_smote)
@@ -207,4 +223,8 @@ def selecting_model(model_comp):
     model_comp["False Negatives"] = false_negatives
     model_comp["False Positives"] = false_positives
     model_comp["Accuracy"] = accuracy
-    model_comp
+    
+    return model_comp
+
+if __name__ == "__main__":
+    run()
