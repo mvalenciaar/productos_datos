@@ -3,20 +3,26 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Productos de datos</title>
+    <title>Dashboard Fraude en Tarjetas de Crédito - trabajo final</title>
+    <meta name="description" content="En este post...">
 </head>
-
 <body>
     <header>
-        <h2>EDA_distance_from_home</h2>
+        <h1>Modelos Analíticos para Fraude en Tarjetas de Crédito</h1>
+        <p>En este Dashboard encontrarás diferentes modelos de clasificación aplicados al fraude en tarjetas de crédito, los cuales al final de la evaluación de ellos, se escogerá el mejor modelo analítico según su Accuracy.</p>       
+        
+        
     </header>
 
     <div>
+        <h2>Análisis Exploratorio de Datos - Distancia desde el domicilio</h2>
+        <p>Esta variable indica la distancia desde el domicilio donde se produjo la transacción</p>
         <img src="{{url_for('static', filename='EDA_distance_from_home.png')}}" alt="report">
     </div>
 	
 	<header>
-        <h2>EDA_distance_from_last_transaction</h2>
+        <h3>Análisis Exploratorio de Datos - Distancia desde la última transacción</h3>
+        <p>Esta variable indica la distnacia desde la última transacción realizada</p>
     </header>
 
     <div>
@@ -24,7 +30,8 @@
     </div>
 	
 	<header>
-        <h2>EDA_ratio_to_median_purchase_price</h2>
+        <h4>Análisis Exploratorio de Datos - Relación con el precio medio de compra</h4>
+        <p>Esta variable indica la relación entre el precio de la transacción y el precio de compra medio</p>
     </header>
 
     <div>
