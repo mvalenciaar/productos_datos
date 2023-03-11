@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-from code import analytic_model
+import analytic_model
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "you-will-never-guess"
@@ -12,9 +12,9 @@ app.config["SECRET_KEY"] = "you-will-never-guess"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    make_plot.run()
+    analytic_model.run()
     return render_template("index.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5006)
+    app.run(debug=True, port=5006, host="0.0.0.0")

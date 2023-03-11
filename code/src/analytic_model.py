@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from src.preparation.preparation import load_file_card
+from preparation.preparation import load_file_card
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -12,22 +12,6 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-
-def run():
-    graph_raw_data()
-    status_fraud()
-    log_reg()
-    confusion_matrix_log_reg()
-    classificat_report_log_reg()
-    decision_tree()
-    confusion_matrix_Dec_tree()
-    classificat_report_decision_tree()
-    knn()
-    score_knn()
-    confusion_matrix_knn()
-    classificat_report_knn()
-    selecting_model(model_comp)
-
 
 ''' Defined Load File '''
 model_data = load_file_card().copy()
@@ -65,6 +49,20 @@ y_smote = df3.fraud
 
 X_train_smote, X_test_smote, y_train_smote, y_test_smote = train_test_split(X_smote, y_smote, test_size=0.2, random_state=39)
 
+def run():
+    graph_raw_data()
+    # status_fraud()
+    # log_reg()
+    # confusion_matrix_log_reg()
+    # classificat_report_log_reg()
+    # decision_tree()
+    # confusion_matrix_Dec_tree()
+    # classificat_report_decision_tree()
+    # knn()
+    # score_knn()
+    # confusion_matrix_knn()
+    # classificat_report_knn()
+    # selecting_model(model_comp)
  
 def graph_raw_data():
     ''' Exploration Data Analysis raw data '''
