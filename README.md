@@ -221,3 +221,14 @@ oro para evitarlos”. 2017. Disponible en: https://www.bbc.com/mundo/vert-cap-4
 [4] Dinero. “¿Cuáles son las leyes que rigen a la banca digital y a la banca tradicional?”. 
 2020. Disponible en: https://www.dinero.com/economia/articulo/legislacion-banca-cuales-son-las-leyes-que-rigen-a-la-banca-digital-y-a-la-banca-tradicional/28067
 
+
+### **Entregable 2: Modelo analítico y Dashboard en Flask**
+
+En esta etapa del trabajo, se construyen dos modelos analíticos para determinar la posibilidad de fraude de tarjetas de crédito, para ello, se decide entrenar un modelo de aprendizaje supervisado como es `Regresión Logística` y uno de clasificación como es `Árbol de Decisiones`, donde finalmente, se escogerá el mejor modelo de acuerdo a su `Accuracy`.
+
+Posteriormente, se guardan las imágenes tanto del Análisis Exploratorio de los Datos (EDA) que se realiza, como de la matriz de confusión para cada modelo propuesto, y finalmente, la tabla con los accuracy de cada uno de ellos, obteniendo el mayor.
+
+Esta información se lleva a una página `HTML`, la cual es construida por medio de la librería Flask de Python.
+A continuación, se relacionan las imágenes de este dashboard.
+
+
