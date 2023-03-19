@@ -21,7 +21,7 @@
     </div>
 	
 	<header>
-        <h3>Análisis Exploratorio de Datos - Distancia desde la última transacción</h3>
+        <h2>Análisis Exploratorio de Datos - Distancia desde la última transacción</h2>
         <p>Esta variable indica la distnacia desde la última transacción realizada</p>
     </header>
 
@@ -30,12 +30,39 @@
     </div>
 	
 	<header>
-        <h4>Análisis Exploratorio de Datos - Relación con el precio medio de compra</h4>
+        <h2>Análisis Exploratorio de Datos - Relación con el precio medio de compra</h2>
         <p>Esta variable indica la relación entre el precio de la transacción y el precio de compra medio</p>
     </header>
 
     <div>
         <img src="{{url_for('static', filename='EDA_ratio_to_median_purchase_price.png')}}" alt="report">
+    </div>
+
+    <header>
+        <h2>Modelos Analíticos - Matriz de confusión: Regresión Logística</h2>
+        <p>A continuación, se presenta la matriz de confusión para el modelo de regresión logística, con la finalidad de evaluar los resultados obtenidos del algoritmo de aprendizaje supervisado.</p>
+    </header>
+
+    <div>
+        <img src="{{url_for('static', filename='confusion_matrix_reg_log.png')}}" alt="report">
+    </div>
+
+    <header>
+        <h2>Modelos Analíticos - Matriz de confusión: Árbol de decisiones</h2>
+        <p>A continuación, se presenta la matriz de confusión para el modelo de árbol de decisiones, el cual resume el rendimiento de un algoritmo de clasificación.</p>
+    </header>
+
+    <div>
+        <img src="{{url_for('static', filename='confusion_matrix_decision_tree.png')}}" alt="report">
+    </div>
+
+    <header>
+        <h2>Elección del mejor modelo</h2>
+        <p>Se comparan los Accuracy de los dos modelos que entrenamos para nuestro problema objetivo de fraudes de tarjetas de crédito, y de esta manera elegimos el mejor modelo para nuestra necesidad.</p>
+    </header>
+
+    <div>
+        <img src="{{url_for('static', filename='best_model.png')}}" alt="report">
     </div>
 
 </body>

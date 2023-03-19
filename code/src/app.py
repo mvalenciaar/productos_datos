@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-import analytic_model
+import analytic_model_fraud
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "you-will-never-guess"
@@ -12,7 +12,7 @@ app.config["SECRET_KEY"] = "you-will-never-guess"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    analytic_model.run()
+    analytic_model_fraud.run()
     return render_template("index.html")
 
 
