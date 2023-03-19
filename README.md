@@ -231,4 +231,26 @@ Posteriormente, se guardan las imágenes tanto del Análisis Exploratorio de los
 Esta información se lleva a una página `HTML`, la cual es construida por medio de la librería Flask de Python.
 A continuación, se relacionan las imágenes de este dashboard.
 
+**DASHBOARD - MODELOS ANALÍTICOS PARA FRAUDE EN TARJETAS DE CRÉDITO**
+
+![EDA1](https://user-images.githubusercontent.com/56141354/226215768-53c5d9be-8572-4168-938c-8631e3642f8e.JPG)
+
+
+![EDA2](https://user-images.githubusercontent.com/56141354/226215921-bdcd57a2-8761-456e-a278-8a28fc0be800.JPG)
+
+
+![EDA3](https://user-images.githubusercontent.com/56141354/226215927-b9c66044-c97d-46e6-b07c-e25f69eb2423.JPG)
+
+
+![Matriz1](https://user-images.githubusercontent.com/56141354/226215940-24101531-09be-4c55-9911-19bf667c8625.JPG)
+
+
+![Matriz2](https://user-images.githubusercontent.com/56141354/226215944-ee0fdd29-2ea1-49f8-b25b-d0aeb61d24b7.JPG)
+
+
+![tabl1](https://user-images.githubusercontent.com/56141354/226215951-df72056d-4c13-479e-92c0-90768f3df070.JPG)
+
+
+
+
 
