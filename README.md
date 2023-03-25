@@ -250,7 +250,326 @@ A continuación, se relacionan las imágenes de este dashboard.
 
 ![tabl1](https://user-images.githubusercontent.com/56141354/226215951-df72056d-4c13-479e-92c0-90768f3df070.JPG)
 
+### **Entregable 3: Modelo y ciclo de vida MLOps en MLFlow**
+
+Para este entregable se realizan los pasos de ciclo de vida de un prodcuto de ML con la ayuda del paquete MLFlow.
+
+Lo primero que se debe hacer es tomar uno de los modelos que teníamos en la entrega 2, para este caso tomamos el modelo de aprendizaje supervisado, `Regresión Logística` con el parámetro de `max_itrer` con un valor por defecto de 200. A este modelo se le realiza en proceso de empaquetado, con sus funciones respectivas de:
+
+    
+```python
+#Carga de datos
+
+def load_data():
+    
+    from preparation.preparation d
+
+    ''' Defined Load File '''
+    model_data = load_file_card().copy()
+
+    ''' Preparin data for analytic model '''
+    x = model_data.drop("fraud", axis = 1).values
+    y = model_data["fraud"].values
+
+    return x, y
+```
+
+```python
+#Particionamiento de datos
+
+def make_train_test_split(x, y):
+    
+    import pandas as pd
+    from imblearn.over_sampling import SMOTE
+    from sklearn.model_selection import train_test_split
+    
+    smote = SMOTE(random_state=39)
+    non_fraud_over, fraud_over = smote.fit_resample(x, y)
+
+    non_fraud_over_df = pd.DataFrame(non_fraud_over, columns=["distance_from_home", "distance_from_last_transaction",
+        "ratio_to_median_purchase_price", "repeat_retailer", "used_chip",
+        "used_pin_number", "online_order"])
+
+    non_fraud_over_df["fraud"] = fraud_over
+    df3 = non_fraud_over_df
+
+    feature_columns = ["distance_from_home", "distance_from_last_transaction",
+    "ratio_to_median_purchase_price", "repeat_retailer", "used_chip", "used_pin_number", "online_order"]
+
+    X_smote = df3[feature_columns]
+    y_smote = df3.fraud
+
+    X_train_smote, X_test_smote, y_train_smote, y_test_smote = train_test_split(X_smote, y_smote, test_size=0.2, random_state=39)
+    
+    return X_train_smote, X_test_smote, y_train_smote, y_test_smote
+```
+
+```python
+#Calculo de metricas
+
+def eval_metrics(y_test_smote, y_pred_logreg_smote):
+    
+    from sklearn.metrics import classification_report
+    from sklearn.metrics import confusion_matrix
+    
+    #confusion matrix
+    confusion_matrix_logreg = confusion_matrix(y_test_smote, y_pred_logreg_smote)
+    
+    #classification report
+    classification_report_logreg = classification_report(y_test_smote, y_pred_logreg_smote, digits=6)
+    
+    return confusion_matrix_logreg, classification_report_logreg  
+```
+
+```python
+#Reporte de métricas
+
+def report(confusion_matrix_logreg, classification_report_logreg):
+    
+    print(f"Confusion matrix Logistic Regression: {confusion_matrix_logreg}")
+    print(f"classification report RL: {classification_report_logreg}")
+```
+
+```python
+#Entrenamiento modelo
+
+def train_logreg (max_iter = 200):
+    
+    import mlflow.sklearn
+    import mlflow    
+    from sklearn.linear_model import LogisticRegression
+    
+    #Habilita autolog
+    mlflow.sklearn.autolog()
+    
+    
+    x, y = load_data()
+    
+    X_train_smote, X_test_smote, y_train_smote, y_test_smote = make_train_test_split(x, y)
+    
+    print('Tracking directory:', mlflow.get_tracking_uri())
+    
+    with mlflow.start_run(run_name = "LogReg_Model") as run:
+    
+        logreg = LogisticRegression(max_iter=max_iter)
+        logreg.fit(X_train_smote, y_train_smote)
+
+        y_pred_logreg_smote = logreg.predict(X_test_smote)
+        
+        
+        confusion_matrix_logreg, classification_report_logreg = eval_metrics(y_test_smote, y_pred_logreg_smote)
+        
+        report(confusion_matrix_logreg, classification_report_logreg)
+        
+        #
+        # Tracking de parámetros
+        #
+        mlflow.log_param("max_iter", max_iter)
+
+        #
+        # Tracking de metricas
+        #
+        mlflow.log_metric("accuracy_logreg", logreg.score(X_test_smote, y_test_smote))
+        #mlflow.log_metric("classification_report_logreg", classification_report_logreg)
+
+        #
+        # Log del modelo
+        #
+        mlflow.sklearn.log_model(logreg, "model")
+        
+        return (run.info.experiment_id, run.info.run_id)
+```
+
+Luego de tener definido y estructurado el modelo, se hacen ejecuciones manuales buscando el mejor parámetro `max_iter`
+
+```python
+train_logreg()
+```
+
+```python
+train_logreg(300)
+```
+
+```python
+train_logreg(500)
+```
+
+```python
+train_logreg(5000)
+```
+
+Una vez se tienen los resultados de estas ejecuciones, se escoge la mejor para hacer el registro del modelo, en este caso se tomó la por defecto, con el parámetro `max_iter = 200`
+
+A partir de aquí se desarrollan las actividades solicitadas para el 3er entregable:
+
+1. Registro del modelo en MLFlow:
+
+Para hacer el registro del modelo en MLFlow, se necesita que las corridas estén respalados en una base de datos, para este caso usaremos SQLite. Para esto se hacen estas adiciones de funciones en el código:
+
+```python
+#Seteo de ruta para registro de modelos
+def set_tracking_uri():
+
+    import mlflow
+
+    mlflow.set_tracking_uri('sqlite:///mlruns.db')
+```
+
+```python
+#Visualización config de rutas
+def display_config():
+
+    import mlflow
+
+    print("Current model registry uri: {}".format(mlflow.get_registry_uri()))
+    print("      Current tracking uri: {}".format(mlflow.get_tracking_uri()))
+```
+
+Adicional, de modifica el código de la función del entrenamiento del modelo, para que llame la fn de cambio de tracking uri y para que registre la corrida como modelo, quedando así:
+
+```python
+#Entrenamiento modelo
+
+def train_logreg (max_iter = 200):
+    
+    import mlflow.sklearn
+    import mlflow    
+    from sklearn.linear_model import LogisticRegression
+    
+    #Habilita autolog
+    mlflow.sklearn.autolog()
+    
+    #Setea entorno para registros
+    set_tracking_uri()
+    
+    x, y = load_data()
+    
+    X_train_smote, X_test_smote, y_train_smote, y_test_smote = make_train_test_split(x, y)
+    
+    print('Tracking directory:', mlflow.get_tracking_uri())
+    
+    with mlflow.start_run(run_name = "LogReg_Model") as run:
+    
+        logreg = LogisticRegression(max_iter=max_iter)
+        logreg.fit(X_train_smote, y_train_smote)
+
+        y_pred_logreg_smote = logreg.predict(X_test_smote)
+        
+        
+        confusion_matrix_logreg, classification_report_logreg = eval_metrics(y_test_smote, y_pred_logreg_smote)
+        
+        report(confusion_matrix_logreg, classification_report_logreg)
+        
+        #
+        # Tracking de parámetros
+        #
+        mlflow.log_param("max_iter", max_iter)
+
+        #
+        # Tracking de metricas
+        #
+        mlflow.log_metric("accuracy_logreg", logreg.score(X_test_smote, y_test_smote))
+        #mlflow.log_metric("classification_report_logreg", classification_report_logreg)
+
+        #
+        # Log del modelo
+        #
+        mlflow.sklearn.log_model(logreg, "model")
+        
+        #
+        #Registro del modelo luego de varias corridas (se descomenta luego de correr con varias max_iter)
+        #
+        mlflow.register_model(
+            f"runs:/{run.info.run_id}",
+            f"sklearn-{max_iter}-iterations-logistic-regression-model"
+        )
+        
+        return (run.info.experiment_id, run.info.run_id)
+```
+
+Una vez se hicieron estos cambios, se procede a ejecutar nuevamente la corrida con el parámetro `max_iter = 200`, la cual al finalizar habrá invocado la fn de `mlflow.register_model`
+
+```python
+train_logreg()
+```
+
+Esto dá como resultado el siguiente ouput:
+
+![image](https://user-images.githubusercontent.com/17460738/227718423-b71a4ac7-0342-4935-9e89-652190bf4a7a.png)
+
+Se observa que se registró exitosamente el modelo en MLFlow, con el nombre 'sklearn-200-iterations-logistic-regression' y el run_id = '541a266554654c8cbe981aa67a94256a'
+
+Para verificarlo, se abre la consola de mlflow y se tiene:
+
+![image](https://user-images.githubusercontent.com/17460738/227718465-c38457f8-15b5-4600-a0ab-06a8ffecf51d.png)
+
+2. Paso del modelo a ambiente de producción (método por interfaz gráfica):
+
+Para este paso, se tiene que se puede hacer desde la consola ui de mlflow, yendo al apartado de 'Models' y entrando al modelo que se quiere transicionar, en este caso el modelo `sklearn-200-iterations-logistic-regression`.
+
+Luego de estar en él, se pasa entre ambientes, pasando primero por el ambiente 'Staging':
+
+![image](https://user-images.githubusercontent.com/17460738/227718931-a1897c38-c611-4eea-902d-842ab14f7ec8.png)
+
+Y quedando:
+
+![image](https://user-images.githubusercontent.com/17460738/227718943-2c09fbf4-888e-4f57-9474-fdde92a36576.png)
+
+Y finalmente, transicionando a producción:
+
+![image](https://user-images.githubusercontent.com/17460738/227718967-80ff42c0-a215-49c9-823e-19d2f4fd305e.png)
+
+Y quedando:
+
+![image](https://user-images.githubusercontent.com/17460738/227718985-0a52eeb2-2c94-4259-800e-c57b2a333a67.png)
+
+Con esto ya se tiene que el modelo se encuentra registrado y en el ambiente de producción en MLFlow.
+
+3. Disponibilizar el modelo por medio de API y consumirlo:
+
+Para culminar, se requiere 'servir' o disponibilizar el modelo por medio de una API REST, la cual el mismo MLFlow nos permite hacerlo.
+
+Antes de disponibilizar el modelo, se debe crear una nueva función en python para la formación del set de pruebas como un parámetro llamado `data`, el cual estará formateado como json y se le pasará a la API para su consulta. La función es:
+
+```python
+def get_json_test_data():
+
+    x, y = load_data()
+    x_train, x_test, y_train, y_test = make_train_test_split(x, y)
+
+    data = x_test.iloc[0:10,:].to_json(orient='split')
+
+    data = repr(data)
+    return data
+
+data = get_json_test_data()
+```
+
+Luego de tener el parámetro `data` pasamos a disponibilizar el modelo, para esto, abrimos una consola de terminal y ejecutamos el siguiente comando:
+
+```
+#!/usr/bin/env sh
+
+export MLFLOW_TRACKING_URI=sqlite:///mlruns.db
+
+mlflow models serve --model-uri runs:/541a266554654c8cbe981aa67a94256a/model --env-manager=local
+```
+
+Esto arroja el output:
+
+![image](https://user-images.githubusercontent.com/17460738/227719261-d8a0b6d7-19d0-4274-a3e2-f2819197fd71.png)
+
+Con esto se evidencia que se encuentra ejecutando el server de MLFlow con el modelo disponible para consumo por API.
+
+Para consumirlo, desde python, se ejecuta el siguiente comando, el cual consume el modelo y envía el parámetro `data`:
+
+```python
+!curl http://localhost:5000/invocations -H 'Content-Type: application/json' -d {data}
+```
+
+Al consumirlo, nos retorna el siguiente output:
+
+![image](https://user-images.githubusercontent.com/17460738/227719693-cab833a6-5c28-46a1-b947-01a7c70d53f2.png)
 
 
-
-
+Con esto vemos que se está consumiendo de manera exitosa el modelo como API y se dá por culminada la entrega.
